@@ -1,0 +1,352 @@
+---
+// Faucet Page - Enhanced Animations & Mobile Optimized
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+	<title>Claim PADI Tokens - PadiTech Faucet</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+	<style>
+		@keyframes spin {
+			to { transform: rotate(360deg); }
+		}
+		.spinner {
+			animation: spin 1s linear infinite;
+		}
+		.fade-in-up {
+			animation: fadeInUp 0.6s ease-out;
+		}
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		.message-enter {
+			animation: messageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+		}
+		@keyframes messageEnter {
+			from {
+				opacity: 0;
+				transform: scale(0.95) translateY(-10px);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1) translateY(0);
+			}
+		}
+		input:focus {
+			outline: none;
+		}
+	</style>
+</head>
+<body class="bg-cyber-darker text-white font-roboto antialiased min-h-screen">
+	
+	<!-- Navigation -->
+	<nav class="fixed top-0 w-full z-50 bg-cyber-dark/90 backdrop-blur-xl border-b border-white/5">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+			<div class="flex justify-between items-center h-16 sm:h-20">
+				<a href="/" class="font-bold italic text-xl sm:text-2xl tracking-tight">
+					<span class="text-cyber-blue">Padi</span><span class="text-cyber-pink">Tech</span>
+				</a>
+				<a href="/" class="text-sm sm:text-base text-gray-400 hover:text-white transition-colors font-medium">
+					Back to Home
+				</a>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Main Content -->
+	<main class="pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6">
+		<div class="max-w-7xl mx-auto">
+			
+			<!-- Header -->
+			<div class="text-center mb-10 sm:mb-16 fade-in-up">
+				<h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold italic mb-4 sm:mb-6">
+					Claim <span class="text-cyber-blue">PADI</span> Tokens
+				</h1>
+				<p class="text-gray-400 text-base sm:text-xl px-4">
+					Enter your wallet address to receive testnet tokens
+				</p>
+			</div>
+
+			<!-- Bento Grid Layout -->
+			<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
+				
+				<!-- Main Form Card -->
+				<div class="lg:col-span-8 bg-cyber-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-2xl border border-white/5 fade-in-up" style="animation-delay: 0.1s;">
+					<div class="mb-6 sm:mb-8">
+						<h2 class="text-xl sm:text-2xl font-bold italic text-white mb-2">Request Tokens</h2>
+						<p class="text-gray-400 text-sm sm:text-base">Submit your wallet address below</p>
+					</div>
+
+					<form id="faucet-form" class="space-y-5 sm:space-y-6">
+						<div>
+							<label for="address" class="block text-xs sm:text-sm font-bold italic text-cyber-blue mb-3 sm:mb-4 uppercase tracking-wider">
+								Wallet Address
+							</label>
+							<input
+								type="text"
+								id="address"
+								placeholder="0x..."
+								required
+								autocomplete="off"
+								spellcheck="false"
+								class="w-full px-4 sm:px-6 py-4 sm:py-5 bg-cyber-dark rounded-xl sm:rounded-2xl border border-white/10 text-white placeholder-gray-500 focus:border-cyber-blue focus:ring-2 focus:ring-cyber-blue/20 transition-all font-mono text-sm sm:text-base"
+							/>
+						</div>
+						
+						<button
+							type="submit"
+							id="submit-btn"
+							class="w-full px-6 sm:px-8 py-4 sm:py-5 bg-cyber-blue text-white font-bold italic text-lg sm:text-xl rounded-xl sm:rounded-2xl hover:bg-cyber-purple transition-all duration-300 shadow-lg shadow-cyber-blue/30 hover:shadow-cyber-purple/30 transform hover:scale-[1.02] active:scale-95 touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+						>
+							<span id="button-text">Request Tokens</span>
+							<svg id="loading-spinner" class="hidden spinner inline-block w-5 h-5 sm:w-6 sm:h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+							</svg>
+						</button>
+					</form>
+
+					<!-- Message Box -->
+					<div id="message-box" class="mt-6 sm:mt-8 hidden"></div>
+				</div>
+
+				<!-- Sidebar Info Cards -->
+				<div class="lg:col-span-4 space-y-4 sm:space-y-6">
+					
+					<!-- Amount Card -->
+					<div class="bg-gradient-to-br from-cyber-pink/20 to-cyber-red/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-cyber-pink/20 shadow-xl hover:shadow-2xl transition-all duration-300 fade-in-up" style="animation-delay: 0.2s;">
+						<div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+							<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-pink rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shadow-cyber-pink/30 flex-shrink-0">
+								<svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+								</svg>
+							</div>
+							<h3 class="font-bold italic text-lg sm:text-xl text-cyber-pink">Amount</h3>
+						</div>
+						<div class="text-4xl sm:text-5xl font-bold italic text-white mb-2">10 PADI</div>
+						<p class="text-gray-300 uppercase tracking-wider text-xs sm:text-sm">Per claim</p>
+					</div>
+
+					<!-- Network Card -->
+					<div class="bg-gradient-to-br from-cyber-purple/20 to-cyber-blue/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-cyber-purple/20 shadow-xl hover:shadow-2xl transition-all duration-300 fade-in-up" style="animation-delay: 0.3s;">
+						<div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+							<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-purple rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shadow-cyber-purple/30 flex-shrink-0">
+								<svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+								</svg>
+							</div>
+							<h3 class="font-bold italic text-lg sm:text-xl text-cyber-purple">Network</h3>
+						</div>
+						<div class="text-xl sm:text-2xl font-bold italic text-white mb-2">Sepolia</div>
+						<p class="text-gray-300 uppercase tracking-wider text-xs sm:text-sm">Ethereum testnet</p>
+					</div>
+
+					<!-- Status Card -->
+					<div class="bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-cyber-green/20 shadow-xl hover:shadow-2xl transition-all duration-300 fade-in-up" style="animation-delay: 0.4s;">
+						<div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+							<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-green rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shadow-cyber-green/30 flex-shrink-0">
+								<svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+								</svg>
+							</div>
+							<h3 class="font-bold italic text-lg sm:text-xl text-cyber-green">Status</h3>
+						</div>
+						<div class="flex items-center gap-3">
+							<span class="w-3 h-3 bg-cyber-green rounded-full animate-pulse shadow-lg shadow-cyber-green/50"></span>
+							<span class="text-lg sm:text-xl font-bold italic text-white">Active</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Contract Info -->
+			<div class="mt-6 sm:mt-8 bg-cyber-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/5 shadow-xl fade-in-up" style="animation-delay: 0.5s;">
+				<h3 class="font-bold italic text-xl sm:text-2xl mb-4 sm:mb-6 text-white">Contract Information</h3>
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+					<div class="bg-cyber-dark rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/5 hover:border-cyber-blue/30 transition-colors">
+						<div class="text-xs text-gray-400 mb-2 sm:mb-3 uppercase tracking-wider">Contract Address</div>
+						<div class="font-mono text-xs sm:text-sm text-cyber-blue break-all">0x48fe28f7893de0d20b31fbabca1fdbe318fa339e</div>
+					</div>
+					<div class="bg-cyber-dark rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/5 hover:border-cyber-purple/30 transition-colors">
+						<div class="text-xs text-gray-400 mb-2 sm:mb-3 uppercase tracking-wider">Token Symbol</div>
+						<div class="font-bold italic text-xl sm:text-2xl text-white">PADI</div>
+					</div>
+					<div class="bg-cyber-dark rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/5 hover:border-cyber-pink/30 transition-colors">
+						<div class="text-xs text-gray-400 mb-2 sm:mb-3 uppercase tracking-wider">Decimals</div>
+						<div class="font-bold italic text-xl sm:text-2xl text-white">18</div>
+					</div>
+					<div class="bg-cyber-dark rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/5 hover:border-cyber-yellow/30 transition-colors">
+						<div class="text-xs text-gray-400 mb-2 sm:mb-3 uppercase tracking-wider">Chain ID</div>
+						<div class="font-bold italic text-xl sm:text-2xl text-white">11155111</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Instructions -->
+			<div class="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+				<div class="bg-cyber-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/5 shadow-xl hover:border-cyber-blue/30 hover:shadow-2xl hover:transform hover:-translate-y-1 transition-all duration-300 fade-in-up" style="animation-delay: 0.6s;">
+					<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-blue text-white rounded-xl sm:rounded-2xl flex items-center justify-center font-bold italic text-lg sm:text-xl mb-4 sm:mb-6 shadow-lg shadow-cyber-blue/30">
+						01
+					</div>
+					<h4 class="font-bold italic text-lg sm:text-xl mb-2 sm:mb-3 text-white">Setup Network</h4>
+					<p class="text-gray-400 text-sm sm:text-base">Add Sepolia testnet to your MetaMask wallet</p>
+				</div>
+				<div class="bg-cyber-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/5 shadow-xl hover:border-cyber-purple/30 hover:shadow-2xl hover:transform hover:-translate-y-1 transition-all duration-300 fade-in-up" style="animation-delay: 0.7s;">
+					<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-purple text-white rounded-xl sm:rounded-2xl flex items-center justify-center font-bold italic text-lg sm:text-xl mb-4 sm:mb-6 shadow-lg shadow-cyber-purple/30">
+						02
+					</div>
+					<h4 class="font-bold italic text-lg sm:text-xl mb-2 sm:mb-3 text-white">Enter Address</h4>
+					<p class="text-gray-400 text-sm sm:text-base">Paste your wallet address in the form above</p>
+				</div>
+				<div class="bg-cyber-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/5 shadow-xl hover:border-cyber-pink/30 hover:shadow-2xl hover:transform hover:-translate-y-1 transition-all duration-300 fade-in-up" style="animation-delay: 0.8s;">
+					<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-pink text-white rounded-xl sm:rounded-2xl flex items-center justify-center font-bold italic text-lg sm:text-xl mb-4 sm:mb-6 shadow-lg shadow-cyber-pink/30">
+						03
+					</div>
+					<h4 class="font-bold italic text-lg sm:text-xl mb-2 sm:mb-3 text-white">Receive Tokens</h4>
+					<p class="text-gray-400 text-sm sm:text-base">Tokens will be sent to your wallet instantly</p>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Client-side Script -->
+	<script>
+		const form = document.getElementById('faucet-form');
+		const addressInput = document.getElementById('address');
+		const submitBtn = document.getElementById('submit-btn');
+		const buttonText = document.getElementById('button-text');
+		const loadingSpinner = document.getElementById('loading-spinner');
+		const messageBox = document.getElementById('message-box');
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			const address = addressInput.value.trim();
+			if (!address) return;
+
+			// Reset message
+			messageBox.className = 'mt-6 sm:mt-8 hidden';
+			messageBox.innerHTML = '';
+
+			// Loading state
+			submitBtn.disabled = true;
+			buttonText.textContent = 'Processing...';
+			loadingSpinner.classList.remove('hidden');
+
+			try {
+				const response = await fetch('/api/faucet', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ address }),
+				});
+
+				const data = await response.json();
+
+				if (response.ok) {
+					// Success
+					messageBox.className = 'mt-6 sm:mt-8 bg-gradient-to-br from-cyber-green/20 to-cyber-blue/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-cyber-green/30 shadow-xl message-enter';
+					let htmlMsg = `
+						<div class="flex items-start gap-3 sm:gap-4">
+							<div class="w-10 h-10 sm:w-12 sm:h-12 bg-cyber-green rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-cyber-green/30">
+								<svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+								</svg>
+							</div>
+							<div class="flex-1 min-w-0">
+								<div class="font-bold italic text-xl sm:text-2xl text-white mb-2 sm:mb-3">Transaction Successful</div>
+								<div class="text-gray-300 text-sm sm:text-base mb-3 sm:mb-4">${data.message}</div>
+					`;
+					if (data.txHash) {
+						htmlMsg += `
+								<a href="https://sepolia.etherscan.io/tx/${data.txHash}" 
+								   target="_blank" 
+								   class="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-cyber-blue text-white font-bold italic text-sm sm:text-base rounded-xl hover:bg-cyber-purple transition-all duration-300 shadow-lg shadow-cyber-blue/20 active:scale-95 touch-manipulation">
+									View on Etherscan
+									<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+									</svg>
+								</a>
+						`;
+					}
+					htmlMsg += `
+							</div>
+						</div>
+					`;
+					messageBox.innerHTML = htmlMsg;
+					addressInput.value = '';
+				} else {
+					// Error
+					messageBox.className = 'mt-6 sm:mt-8 bg-gradient-to-br from-cyber-red/20 to-cyber-pink/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-cyber-red/30 shadow-xl message-enter';
+					messageBox.innerHTML = `
+						<div class="flex items-start gap-3 sm:gap-4">
+							<div class="w-10 h-10 sm:w-12 sm:h-12 bg-cyber-red rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-cyber-red/30">
+								<svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+								</svg>
+							</div>
+							<div class="flex-1 min-w-0">
+								<div class="font-bold italic text-xl sm:text-2xl text-white mb-2">Transaction Failed</div>
+								<div class="text-gray-300 text-sm sm:text-base break-words">${data.error || 'An error occurred'}</div>
+								${data.details ? `<div class="text-xs sm:text-sm text-gray-400 mt-2 break-words">${data.details}</div>` : ''}
+							</div>
+						</div>
+					`;
+				}
+			} catch (error) {
+				messageBox.className = 'mt-6 sm:mt-8 bg-gradient-to-br from-cyber-red/20 to-cyber-pink/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-cyber-red/30 shadow-xl message-enter';
+				messageBox.innerHTML = `
+					<div class="flex items-start gap-3 sm:gap-4">
+						<div class="w-10 h-10 sm:w-12 sm:h-12 bg-cyber-red rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-cyber-red/30">
+							<svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+						</div>
+						<div class="flex-1 min-w-0">
+							<div class="font-bold italic text-xl sm:text-2xl text-white mb-2">Network Error</div>
+							<div class="text-gray-300 text-sm sm:text-base">Failed to connect to server</div>
+						</div>
+					</div>
+				`;
+				console.error('Fetch error:', error);
+			} finally {
+				submitBtn.disabled = false;
+				buttonText.textContent = 'Request Tokens';
+				loadingSpinner.classList.add('hidden');
+			}
+		});
+	</script>
+
+	<!-- Lenis Smooth Scroll -->
+	<script>
+		import Lenis from 'lenis'
+
+		const lenis = new Lenis({
+			duration: 1.2,
+			easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+			smoothWheel: true,
+			smoothTouch: false,
+			touchMultiplier: 2,
+		})
+
+		function raf(time) {
+			lenis.raf(time)
+			requestAnimationFrame(raf)
+		}
+
+		requestAnimationFrame(raf)
+	</script>
+</body>
+</html>
