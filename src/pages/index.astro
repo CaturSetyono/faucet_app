@@ -1,0 +1,314 @@
+---
+// Landing Page - Cyberpunk Aesthetic
+---
+
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+	<title>PadiTech Faucet - Cyberpunk Edition</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background: linear-gradient(to bottom, #0a0a0a 0%, #0f0f0f 100%);
+		}
+		.neon-text {
+			text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+		}
+		.neon-border {
+			box-shadow: 0 0 10px currentColor, inset 0 0 10px currentColor;
+		}
+		.glitch {
+			position: relative;
+		}
+		.glitch:hover::before,
+		.glitch:hover::after {
+			content: attr(data-text);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		.glitch:hover::before {
+			left: 2px;
+			text-shadow: -2px 0 #00ff41;
+			clip: rect(24px, 550px, 90px, 0);
+			animation: glitch-anim-2 3s infinite linear alternate-reverse;
+		}
+		.glitch:hover::after {
+			left: -2px;
+			text-shadow: -2px 0 #00f0ff, 2px 2px #ff2a6d;
+			clip: rect(85px, 550px, 140px, 0);
+			animation: glitch-anim 2.5s infinite linear alternate-reverse;
+		}
+		@keyframes glitch-anim {
+			0% { clip: rect(39px, 9999px, 75px, 0); }
+			20% { clip: rect(71px, 9999px, 28px, 0); }
+			40% { clip: rect(14px, 9999px, 98px, 0); }
+			60% { clip: rect(88px, 9999px, 56px, 0); }
+			80% { clip: rect(25px, 9999px, 103px, 0); }
+			100% { clip: rect(61px, 9999px, 8px, 0); }
+		}
+		@keyframes glitch-anim-2 {
+			0% { clip: rect(20px, 9999px, 130px, 0); }
+			20% { clip: rect(90px, 9999px, 45px, 0); }
+			40% { clip: rect(55px, 9999px, 85px, 0); }
+			60% { clip: rect(10px, 9999px, 110px, 0); }
+			80% { clip: rect(70px, 9999px, 25px, 0); }
+			100% { clip: rect(35px, 9999px, 95px, 0); }
+		}
+		.scanlines {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+			background: repeating-linear-gradient(
+				0deg,
+				rgba(0, 0, 0, 0.15) 0px,
+				transparent 1px,
+				transparent 2px,
+				rgba(0, 0, 0, 0.15) 3px
+			);
+			z-index: 1;
+			opacity: 0.3;
+		}
+		.cyber-grid {
+			background-image: 
+				linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+			background-size: 50px 50px;
+		}
+		.fade-in-up {
+			animation: fadeInUp 0.8s ease-out;
+		}
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	</style>
+</head>
+<body class="bg-cyber-black text-white font-roboto antialiased overflow-x-hidden relative">
+	
+	<!-- Scanlines Effect -->
+	<div class="scanlines"></div>
+	
+	<!-- Navigation -->
+	<nav class="fixed top-0 w-full z-50 bg-cyber-black/90 backdrop-blur-sm border-b border-cyber-neon-green/20">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+			<div class="flex justify-between items-center h-16 sm:h-20">
+				<div class="font-black italic text-xl sm:text-2xl tracking-tighter">
+					<span class="text-cyber-neon-green neon-text">PADI</span><span class="text-cyber-neon-cyan">TECH</span>
+				</div>
+				<a href="/faucet" 
+				   class="px-6 sm:px-8 py-2 sm:py-3 bg-cyber-neon-green text-cyber-black font-black italic text-sm sm:text-base hover:bg-cyber-neon-cyan hover:text-cyber-black transition-all duration-300 active:scale-95 touch-manipulation uppercase tracking-wider">
+					LAUNCH
+				</a>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Hero Section -->
+	<section class="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20 pb-12 relative z-10">
+		<div class="max-w-7xl w-full">
+			<!-- Hero Content -->
+			<div class="text-center mb-16 sm:mb-24">
+				<div class="mb-8 sm:mb-12 fade-in-up">
+					<h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black italic leading-none mb-4 sm:mb-6 glitch" data-text="PADI">
+						<span class="text-cyber-neon-green neon-text">PADI</span>
+					</h1>
+					<h2 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black italic leading-none">
+						<span class="text-white">TOKEN FAUCET</span>
+					</h2>
+				</div>
+				<p class="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-12 font-light uppercase tracking-widest fade-in-up" style="animation-delay: 0.2s;">
+					Decentralized Distribution Protocol
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in-up" style="animation-delay: 0.4s;">
+					<a href="/faucet" 
+					   class="w-full sm:w-auto px-10 sm:px-12 py-4 sm:py-5 bg-cyber-neon-green text-cyber-black font-black italic text-lg sm:text-xl hover:bg-cyber-neon-cyan transition-all duration-300 transform hover:scale-105 active:scale-95 neon-border border-2 border-cyber-neon-green hover:border-cyber-neon-cyan uppercase tracking-wider touch-manipulation">
+						GET TOKENS
+					</a>
+					<a href="#specs" 
+					   class="w-full sm:w-auto px-10 sm:px-12 py-4 sm:py-5 bg-transparent text-cyber-neon-cyan font-black italic text-lg sm:text-xl border-2 border-cyber-neon-cyan hover:bg-cyber-neon-cyan hover:text-cyber-black transition-all duration-300 transform hover:scale-105 active:scale-95 uppercase tracking-wider touch-manipulation">
+						SPECS
+					</a>
+				</div>
+			</div>
+
+			<!-- Info Cards Grid -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-12 sm:mt-20">
+				<!-- Card 1 - Amount -->
+				<div class="bg-cyber-card border-2 border-cyber-neon-green/30 p-6 sm:p-8 hover:border-cyber-neon-green transition-all duration-300 fade-in-up" style="animation-delay: 0.5s;">
+					<div class="flex items-center gap-4 mb-6">
+						<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-neon-green/20 border border-cyber-neon-green flex items-center justify-center">
+							<svg class="w-6 h-6 sm:w-7 sm:h-7 text-cyber-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+						</div>
+						<div>
+							<div class="text-3xl sm:text-4xl font-black italic text-cyber-neon-green neon-text">10</div>
+							<div class="text-xs sm:text-sm text-gray-500 uppercase tracking-widest">TOKENS</div>
+						</div>
+					</div>
+					<div class="text-sm text-gray-400 uppercase tracking-wider">Per Claim</div>
+				</div>
+
+				<!-- Card 2 - Network -->
+				<div class="bg-cyber-card border-2 border-cyber-neon-cyan/30 p-6 sm:p-8 hover:border-cyber-neon-cyan transition-all duration-300 fade-in-up" style="animation-delay: 0.6s;">
+					<div class="flex items-center gap-4 mb-6">
+						<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-neon-cyan/20 border border-cyber-neon-cyan flex items-center justify-center">
+							<svg class="w-6 h-6 sm:w-7 sm:h-7 text-cyber-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+							</svg>
+						</div>
+						<div>
+							<div class="text-xl sm:text-2xl font-black italic text-cyber-neon-cyan">SEPOLIA</div>
+							<div class="text-xs sm:text-sm text-gray-500 uppercase tracking-widest">NETWORK</div>
+						</div>
+					</div>
+					<div class="text-sm text-gray-400 uppercase tracking-wider">Ethereum Testnet</div>
+				</div>
+
+				<!-- Card 3 - Status -->
+				<div class="bg-cyber-card border-2 border-cyber-neon-pink/30 p-6 sm:p-8 hover:border-cyber-neon-pink transition-all duration-300 fade-in-up" style="animation-delay: 0.7s;">
+					<div class="flex items-center gap-4 mb-6">
+						<div class="w-12 h-12 sm:w-14 sm:h-14 bg-cyber-neon-pink/20 border border-cyber-neon-pink flex items-center justify-center">
+							<svg class="w-6 h-6 sm:w-7 sm:h-7 text-cyber-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+							</svg>
+						</div>
+						<div>
+							<div class="text-xl sm:text-2xl font-black italic text-cyber-neon-pink">ONLINE</div>
+							<div class="text-xs sm:text-sm text-gray-500 uppercase tracking-widest">STATUS</div>
+						</div>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="w-2 h-2 bg-cyber-neon-green rounded-full animate-pulse"></span>
+						<span class="text-sm text-gray-400 uppercase tracking-wider">24/7 Active</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- How It Works -->
+			<div class="mt-16 sm:mt-24 fade-in-up" style="animation-delay: 0.8s;">
+				<h3 class="text-2xl sm:text-3xl md:text-4xl font-black italic text-center mb-10 sm:mb-16">
+					<span class="text-cyber-neon-cyan neon-text">HOW IT</span> <span class="text-white">WORKS</span>
+				</h3>
+				<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+					<div class="text-center group">
+						<div class="inline-flex w-16 h-16 sm:w-20 sm:h-20 bg-cyber-neon-green/10 border-2 border-cyber-neon-green items-center justify-center mb-6 group-hover:bg-cyber-neon-green group-hover:text-cyber-black transition-all duration-300">
+							<span class="text-2xl sm:text-3xl font-black italic text-cyber-neon-green group-hover:text-cyber-black">01</span>
+						</div>
+						<h4 class="text-lg sm:text-xl font-black italic mb-3 text-white uppercase tracking-wider">Connect</h4>
+						<p class="text-sm sm:text-base text-gray-400 uppercase tracking-wide">Setup Sepolia Network</p>
+					</div>
+					<div class="text-center group">
+						<div class="inline-flex w-16 h-16 sm:w-20 sm:h-20 bg-cyber-neon-cyan/10 border-2 border-cyber-neon-cyan items-center justify-center mb-6 group-hover:bg-cyber-neon-cyan group-hover:text-cyber-black transition-all duration-300">
+							<span class="text-2xl sm:text-3xl font-black italic text-cyber-neon-cyan group-hover:text-cyber-black">02</span>
+						</div>
+						<h4 class="text-lg sm:text-xl font-black italic mb-3 text-white uppercase tracking-wider">Submit</h4>
+						<p class="text-sm sm:text-base text-gray-400 uppercase tracking-wide">Enter Wallet Address</p>
+					</div>
+					<div class="text-center group">
+						<div class="inline-flex w-16 h-16 sm:w-20 sm:h-20 bg-cyber-neon-pink/10 border-2 border-cyber-neon-pink items-center justify-center mb-6 group-hover:bg-cyber-neon-pink group-hover:text-cyber-black transition-all duration-300">
+							<span class="text-2xl sm:text-3xl font-black italic text-cyber-neon-pink group-hover:text-cyber-black">03</span>
+						</div>
+						<h4 class="text-lg sm:text-xl font-black italic mb-3 text-white uppercase tracking-wider">Receive</h4>
+						<p class="text-sm sm:text-base text-gray-400 uppercase tracking-wide">Get Tokens Instantly</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Tech Specs Section -->
+	<section id="specs" class="py-16 sm:py-24 px-4 sm:px-6 relative z-10 cyber-grid">
+		<div class="max-w-7xl mx-auto">
+			<h2 class="text-3xl sm:text-5xl md:text-6xl font-black italic text-center mb-12 sm:mb-20">
+				<span class="text-cyber-neon-green neon-text">TECH</span> <span class="text-white">SPECS</span>
+			</h2>
+			
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+				<div class="bg-cyber-card border-l-4 border-cyber-neon-green p-6 sm:p-8 hover:bg-cyber-neon-green/5 transition-all duration-300">
+					<div class="text-xs sm:text-sm text-gray-500 mb-2 uppercase tracking-widest">Token Name</div>
+					<div class="font-black italic text-2xl sm:text-3xl text-cyber-neon-green">PADITECH</div>
+					<div class="text-sm text-gray-400 mt-1">(PADI)</div>
+				</div>
+				<div class="bg-cyber-card border-l-4 border-cyber-neon-cyan p-6 sm:p-8 hover:bg-cyber-neon-cyan/5 transition-all duration-300">
+					<div class="text-xs sm:text-sm text-gray-500 mb-2 uppercase tracking-widest">Contract</div>
+					<div class="font-mono text-xs sm:text-sm text-cyber-neon-cyan break-all">0x48fe28f7893de0d20b31fbabca1fdbe318fa339e</div>
+				</div>
+				<div class="bg-cyber-card border-l-4 border-cyber-neon-pink p-6 sm:p-8 hover:bg-cyber-neon-pink/5 transition-all duration-300">
+					<div class="text-xs sm:text-sm text-gray-500 mb-2 uppercase tracking-widest">Network</div>
+					<div class="font-black italic text-2xl sm:text-3xl text-cyber-neon-pink">SEPOLIA</div>
+					<div class="text-sm text-gray-400 mt-1">Ethereum Testnet</div>
+				</div>
+				<div class="bg-cyber-card border-l-4 border-cyber-neon-yellow p-6 sm:p-8 hover:bg-cyber-neon-yellow/5 transition-all duration-300">
+					<div class="text-xs sm:text-sm text-gray-500 mb-2 uppercase tracking-widest">Decimals</div>
+					<div class="font-black italic text-2xl sm:text-3xl text-cyber-neon-yellow">18</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="py-16 sm:py-24 px-4 sm:px-6 relative z-10">
+		<div class="max-w-4xl mx-auto text-center">
+			<div class="bg-cyber-card border-2 border-cyber-neon-green p-8 sm:p-16 hover:border-cyber-neon-cyan transition-all duration-300">
+				<h2 class="text-3xl sm:text-5xl md:text-6xl font-black italic mb-6 sm:mb-8">
+					<span class="text-cyber-neon-green neon-text">READY</span> <span class="text-white">TO START?</span>
+				</h2>
+				<p class="text-gray-400 mb-8 sm:mb-10 text-base sm:text-lg uppercase tracking-widest">
+					Claim Your Tokens Now
+				</p>
+				<a href="/faucet" 
+				   class="inline-block px-10 sm:px-16 py-4 sm:py-6 bg-cyber-neon-green text-cyber-black font-black italic text-lg sm:text-2xl hover:bg-cyber-neon-cyan transition-all duration-300 transform hover:scale-105 active:scale-95 neon-border border-2 border-cyber-neon-green hover:border-cyber-neon-cyan uppercase tracking-wider touch-manipulation">
+					LAUNCH FAUCET
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="border-t border-cyber-neon-green/20 py-8 sm:py-10 px-4 sm:px-6 relative z-10">
+		<div class="max-w-7xl mx-auto text-center">
+			<p class="font-black italic text-base sm:text-lg uppercase tracking-wider">
+				<span class="text-cyber-neon-green neon-text">PADI</span><span class="text-cyber-neon-cyan">TECH</span> 
+				<span class="text-gray-600 mx-3">|</span> 
+				<span class="text-gray-500 text-sm">POWERED BY ETHEREUM</span>
+			</p>
+		</div>
+	</footer>
+
+	<!-- Lenis Smooth Scroll -->
+	<script>
+		import Lenis from 'lenis'
+
+		const lenis = new Lenis({
+			duration: 1.2,
+			easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+			smoothWheel: true,
+			smoothTouch: false,
+		})
+
+		function raf(time) {
+			lenis.raf(time)
+			requestAnimationFrame(raf)
+		}
+
+		requestAnimationFrame(raf)
+	</script>
+</body>
+</html>
